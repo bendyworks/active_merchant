@@ -8,11 +8,11 @@ require 'test_helper'
 #       AMEX: 374255312721002
 
 class RemotePayLeapTest < Test::Unit::TestCase
-  
+
   def setup
     ActiveMerchant::Billing::Base.mode = :test
     @gateway = PayLeapGateway.new(fixtures(:payleap))
-    
+
     @amount = 104
     @credit_card = ActiveMerchant::Billing::CreditCard.new(
         :type => "american_express",
@@ -33,14 +33,14 @@ class RemotePayLeapTest < Test::Unit::TestCase
         :first_name => "John",
         :last_name => "Doe"
     )
-    
-    @options = { 
+
+    @options = {
       :order_id => '1',
       :billing_address => address,
       :description => 'Store Purchase'
     }
   end
-  
+
   def test_successful_purchase
     assert response = @gateway.purchase(@amount, @credit_card, @options)
     assert_success response
@@ -72,6 +72,6 @@ class RemotePayLeapTest < Test::Unit::TestCase
               )
     assert response = gateway.purchase(@amount, @credit_card, @options)
     assert_failure response
-#    assert_equal 'REPLACE WITH FAILURE MESSAGE', response.message
+    # assert_equal 'REPLACE WITH FAILURE MESSAGE', response.message
   end
 end

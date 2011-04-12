@@ -196,6 +196,7 @@ module ActiveMerchant #:nodoc:
         post[:ExtData] = ""
         # use PostData class?
         request = post.merge(parameters).map {|key, value| "#{key}=#{CGI.escape(value.to_s)}"}.join("&")
+
         request
       end
     end # class PayLeapGateway
